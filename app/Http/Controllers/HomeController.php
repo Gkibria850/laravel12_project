@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
    public function index(){
-    return view('welcome');
+      $data['meta_title'] = 'Welcome'; 
+    return view('welcome', $data);
    }
 }

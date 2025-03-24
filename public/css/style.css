@@ -122,11 +122,12 @@ form .row input::placeholder{
     -webkit-appearance: none;
     width: 100%;
     font-size: 1.15rem;
-    padding: 0.505en 7en 0.405en 1en;
+    padding: 10px 10px 10px 10px;
     background-color: #fff;
-    border:2px solid #caced1;
+    border: 2px solid #caced1;
     border-radius: 5px;
     color: #000;
+  
     cursor: pointer;
 
 }

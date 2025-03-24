@@ -9,16 +9,19 @@ class AuthController extends Controller
     public function registration()
     {
         // Registration logic
-        return view('auth.registration');
+        $data['meta_title'] = 'Registration Page'; 
+        return view('auth.registration', $data);
     }
     public function login()
     {
         // Login logic
-        return view('auth.login');
+        $data['meta_title'] = 'Login Page'; 
+        return view('auth.login', $data);
     }
     public function forgetpassword()
     {
         // Forget Password logic
-        return view('auth.forgetpassword');
+        $data['meta_title'] = 'Forget Password Page';
+        return view('auth.forgetpassword', $data);
     }
 }
