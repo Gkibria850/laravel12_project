@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
 use Str;
+use Auth;
+
 
 class AuthController extends Controller
 {
@@ -50,6 +52,34 @@ class AuthController extends Controller
         // Login logic
         $data['meta_title'] = 'Login Page'; 
         return view('auth.login', $data);
+    }
+    public function login_post(Request $request)
+    {
+      //dd($request->all());
+      if(Auth::attempt(['email' => $request->email, 'password' => $request->password],true))
+      {
+        if(Auth::user()->is_role == 0)
+        {
+            echo"User Dashboard"; die();
+          //return redirect()->route('dashboard');
+        }
+        else if(Auth::user()->is_role == 1)
+        {
+            echo"Admin Dashboard"; die();
+          //return redirect()->route('admin.dashboard');
+        }
+        else if(Auth::user()->is_role == 2)
+        {
+            echo"Superadmin Dashboard"; die();
+          //return redirect()->route('superadmin.dashboard');
+        }else{
+            Auth::logout();
+            return redirect('login')->with('error', 'Unauthorized access. Please login again.');
+        }
+      }else{
+        return redirect()->back()->with('error', 'Please enter the carrect email address and password');
+      }
+
     }
     public function forgetpassword()
     {
