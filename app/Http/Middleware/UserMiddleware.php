@@ -13,7 +13,7 @@ class UserMiddleware
     {
     if(Auth::check())
     {
-        if(Auth::check()->is_role == 0)
+        if(Auth::user()->is_role == 0)
         {
             return $next($request);
            

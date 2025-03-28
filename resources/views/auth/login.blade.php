@@ -9,12 +9,12 @@
             <div class="title">
                 <span> Login Page</span>
             </div>
-            <form method="POST" >
+            <form method="POST"  action="{{url('login_post')}}">
                 @csrf
                 
                 <div class="row">
                     <i class="fas fa-user"></i>
-                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    <input type="email" value="{{old('email')}}" name="email" required placeholder="Enter your email">
                 </div>
                 <div class="row">
                     <i class="fas fa-lock"></i>

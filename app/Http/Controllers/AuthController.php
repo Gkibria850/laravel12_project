@@ -58,22 +58,22 @@ class AuthController extends Controller
       //dd($request->all());
       if(Auth::attempt(['email' => $request->email, 'password' => $request->password],true))
       {
-        if(Auth::user()->is_role == 0)
+        if(Auth::User()->is_role == 0)
         {
-            echo"User Dashboard"; die();
-          //return redirect()->route('dashboard');
+            //echo"User Dashboard"; die();
+            return redirect()->intended('user/dashboard');
         }
-        else if(Auth::user()->is_role == 1)
+        else if(Auth::User()->is_role == 1)
         {
-            echo"Admin Dashboard"; die();
-          //return redirect()->route('admin.dashboard');
+            //echo"Admin Dashboard"; die();
+            return redirect()->intended('admin/dashboard');
         }
-        else if(Auth::user()->is_role == 2)
+        else if(Auth::User()->is_role == 2)
         {
-            echo"Superadmin Dashboard"; die();
-          //return redirect()->route('superadmin.dashboard');
+           // echo"Superadmin Dashboard"; die();
+           return redirect()->intended('superadmin/dashboard');
         }else{
-            Auth::logout();
+            //Auth::logout();
             return redirect('login')->with('error', 'Unauthorized access. Please login again.');
         }
       }else{

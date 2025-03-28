@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Respones;
 use Auth;
 
+
 class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
     if(Auth::check())
     {
-        if(Auth::check()->is_role == 1)
+        if(Auth::user()->is_role == 1)
         {
             return $next($request);
            
