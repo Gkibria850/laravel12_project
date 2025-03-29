@@ -25,3 +25,4 @@ Route::group(['middleware' => 'admin'], function(){
 Route::group(['middleware' => 'user'], function(){
     Route::get('user/dashboard', [DashboardController::class, 'dashboard']);
 });
+Route::get('logout', [AuthController::class, 'logout']);
