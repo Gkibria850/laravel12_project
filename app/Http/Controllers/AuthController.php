@@ -7,6 +7,8 @@ use App\Models\User;
 use Hash;
 use Str;
 use Auth;
+use Mail;
+use App\Mail\ForgotPasswordMail;
 
 
 class AuthController extends Controller
@@ -87,6 +89,45 @@ class AuthController extends Controller
         $data['meta_title'] = 'Forget Password Page';
         return view('auth.forgetpassword', $data);
     }
+
+
+    public function forgot_post(Request $request)
+	{
+		//dd($request->all());
+	   // $user = User::where('email', $request->email)->first();
+		$count = User::where('email', '=',$request->email)->count();
+	   if($count > 0){
+			$user = User::where('email','=', $request->email)->first();
+		   
+		//    $random_pass = rand(111111,999999);
+		//    $user->password = Hash::make($random_pass);
+			$user->save();
+			//$this->sendResetPasswordEmail($count, $token);
+			Mail::to($user->email)->send(new ForgotPasswordMail($user));
+			return redirect()->back()->with('success','Reset Password Link has been sent to your email address');
+		}else{
+			return redirect()->back()->with('error','No user found with this email address');
+		}
+	}
+
+    // public function forgot_post(Request $request){
+ 
+    //     // Forget Password logic here
+    //     $count = User::where('email','=', $request->email)->count();
+    //     if($count > 0){
+    //         $user = User::where('email','=', $request->email)->first();
+    //         $user->save();
+    //      //Mail Start
+    //      Mail::to($user->email)->send(new ForgotPasswordMail($user));
+
+    //      //Mail End 
+
+    //     return redirect()->back()->with('success', 'Password reset link has been sent to your email address.');
+          
+    //     }else{
+    //         return redirect()->back()->with('error', 'Email address does not exist.');
+    //     }
+    // }
     public function logout(){
         Auth::logout();
         return redirect(url('/'));
