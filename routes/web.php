@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SuperAdminController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -19,6 +20,9 @@ Route::post('forgot_post', [AuthController::class, 'forgot_post']);
 
 Route::group(['middleware' => 'superadmin'], function (){
     Route::get('superadmin/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('superadmin/user/list', [SuperAdminController::class, 'user_list']);
+    Route::get('superadmin/user/delete/{id}', [SuperAdminController::class, 'user_delete']);
+
 });
 Route::group(['middleware' => 'admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
