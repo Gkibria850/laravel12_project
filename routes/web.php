@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\StudentController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -22,7 +23,10 @@ Route::group(['middleware' => 'superadmin'], function (){
     Route::get('superadmin/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('superadmin/user/list', [SuperAdminController::class, 'user_list']);
     Route::get('superadmin/user/delete/{id}', [SuperAdminController::class, 'user_delete']);
-
+//students
+Route::get('superadmin/student/list', [StudentController::class, 'student_list']);
+Route::get('superadmin/student/add', [StudentController::class, 'add_student']);
+Route::post('superadmin/student/add', [StudentController::class, 'store_student']);
 });
 Route::group(['middleware' => 'admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
