@@ -10,7 +10,7 @@ use Str;
 
 class StudentController extends Controller
 {
-    public function student_list()
+    public function student_list(Request $request)
     {
         $data['meta_title'] = 'Students List'; 
         $data['getRecord'] = StudentsModel::getRecord();
@@ -26,25 +26,25 @@ class StudentController extends Controller
      {
 
         //dd($request->all());
-        $save =  new StudentsMode;
+        $save = new StudentsModel;
         $save->name = trim($request->name);
         $save->email = trim($request->email);
         $save->phone = trim($request->phone);
         $save->roll_number = trim($request->roll_number);
-        $save->current_address = trim($request->current_address);
-        $save->permanent_address= trim($request->permanent_address);
+        $save->address = trim($request->address);
+        $save->permanent_address = trim($request->permanent_address);
         $save->status = trim($request->status);
         $save->blood_group = trim($request->blood_group);
         $save->father_name = trim($request->father_name);
         $save->mother_name = trim($request->mother_name);
         $save->date_of_birth = trim($request->date_of_birth);
         $save->gender = trim($request->gender);
-        $save->religion= trim($request->religion);
+        $save->religion = trim($request->religion);
         $save->admission_date = trim($request->admission_date);
         $save->created_by_id = Auth::id();
     
         // Save user to the database
-        $save->save();
+      
         //Handle profile picture upload
         if ($request->hasFile('profile_pic')) {
             $image = $request->file('profile_pic');
@@ -53,12 +53,69 @@ class StudentController extends Controller
             $image->move($destinationPath, $image_name);
 
             // Update the user's profile picture
-            $user->profile_pic = $image_name;
-            $user->save();
+            $save->profile_pic = $image_name;
+            $save->save();
         }
+
+        $save->save();
          // Redirect with success message
-         return redirect('superadmin/students/list')->with('success', 'Student created successfully');
+         return redirect('superadmin/student/list')->with('success', 'Student created successfully');
 
      }
+     public function edit_student($id)
+     {
+        $data['meta_title'] = 'Edit Student'; 
+        $data['getRecord'] = StudentsModel::find($id);
+        return view('superadmin.students.edit',$data);
+     }
+     public function editupdate_student(Request $request, $id){
+        $save = StudentsModel::find($id);
+        $save->name = trim($request->name);
+        $save->email = trim($request->email);
+        $save->phone = trim($request->phone);
+        $save->roll_number = trim($request->roll_number);
+        $save->address = trim($request->address);
+        $save->permanent_address = trim($request->permanent_address);
+        $save->status = trim($request->status);
+        $save->blood_group = trim($request->blood_group);
+        $save->father_name = trim($request->father_name);
+        $save->mother_name = trim($request->mother_name);
+        $save->date_of_birth = trim($request->date_of_birth);
+        $save->gender = trim($request->gender);
+        $save->religion = trim($request->religion);
+        $save->admission_date = trim($request->admission_date);
+        $save->edited_by_id = Auth::id();
+         // Handle profile picture upload
+        if ($request->hasFile('profile_pic')) {
+            $image = $request->file('profile_pic');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('upload/profile/');
+            $image->move($destinationPath, $image_name);
+
+            // Update the user's profile picture
+            $save->profile_pic = $image_name;
+            $save->save();
+        }
+        $save->save();
+
+        return redirect('superadmin/student/list')->with('success', 'Student Edit Update  successfully');
+     }
+    //  public function student_destroy($id)
+    //  {
+    //      $student = StudentsModel::getSingle($id);
+     
+    //      if (!$student) {
+    //          return redirect('superadmin/student/list')->with('error', 'Student not found');
+    //      }
+     
+    //      $student->is_delete = 1;
+    //      $student->save();
+     
+    //      return redirect('superadmin/student/list')->with('success', 'Student deleted successfully');
+    //  }
+    public function student_destroy($id){
+
+    }
+     
 }
 

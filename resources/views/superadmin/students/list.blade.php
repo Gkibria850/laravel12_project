@@ -1,5 +1,48 @@
 @extends('layouts.backend')
 @section('content')
+
+
+<div class="container">
+  
+
+    <form method="get" action="" id="itemForm" class="d-flex flex-wrap align-items-center">
+    <div class="me-2 mb-2">
+        <input type="text" name="id" value="{{Request()->id}}" class="form-control" placeholder="Enter Your id"/>
+
+    </div>
+    <div class="me-2 mb-2">
+        <input type="text" name="name" value="{{Request()->name}}" class="form-control" placeholder="Enter Your Name"/>
+
+    </div>
+    <div class="me-2 mb-2">
+        <input type="email" name="email" value="{{Request()->email}}" class="form-control" placeholder="Enter Your Email"/>
+
+    </div>
+    <div class="me-2 mb-2">
+        <input type="text" name="phone" value="{{Request()->phone}}" class="form-control" placeholder="Enter Your phone"/>
+
+    </div>
+    <div class="me-2 mb-2">
+        <input type="text" name="roll_number" value="{{Request()->roll_number}}" class="form-control" placeholder="Enter Your roll_number"/>
+
+    </div>
+    <div class="me-2 mb-2">
+        <input type="text" name="father_name" value="{{Request()->father_name}}" class="form-control" placeholder="Enter Your roll_number"/>
+
+    </div>
+    <div class="me-2 mb-2">
+        <input type="date" name="date_of_birth" value="{{Request()->date_of_birth}}" class="form-control" placeholder="Enter Your date_of_birth"/>
+    </div>
+    <div class="me-2 mb-2">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+    <div class="mb-2">
+        <a href="{{url('superadmin/student/list')}}" class="btn btn-warning">Reset</a>
+
+    </div>
+    </form>
+</div>
+
 <div class="col-md-12 mt-4">
     <div class="card p-4">
         @include('_message')
@@ -26,6 +69,7 @@
                         <th scope="col">Image</th>
                         <th scope="col">date_of_birth</th>
                         <th scope="col">admission_date</th>
+                        
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -43,12 +87,19 @@
                         <td>{{$value->address}}</td>
                         <td>{{$value->father_name}}</td>
                         <td>{{$value->gender}}</td>
-                        <td><img src="https://via.placeholder.com/150" alt="Profile Image"></td>
+                        <td>
+                            @if (!empty($value->getProfile()))
+                                <img src="{{ $value->getProfile() }}" alt="Profile Image" class="img-responsive img-thumbnail" width="50" height="50">
+                            @else
+                                <img src="{{ url('img/no-image.png') }}" alt="No Image Available" class="img-responsive img-thumbnail" width="50" height="50">
+                            @endif
+                        </td>
                         <td>{{date('d-m-Y', strtotime($value->date_of_birth))}}</td>
                         <td>{{date('d-m-Y', strtotime($value->admission_date))}}</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                            <a href="{{url('superadmin/user/delete/'.$value->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                        
+                        <td style="min-width: 120px;">
+                            <a href="{{url('superadmin/student/edit/'.$value->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                            <a href="{{url('superadmin/student/delete/'.$value->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete?');"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach

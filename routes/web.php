@@ -27,6 +27,9 @@ Route::group(['middleware' => 'superadmin'], function (){
 Route::get('superadmin/student/list', [StudentController::class, 'student_list']);
 Route::get('superadmin/student/add', [StudentController::class, 'add_student']);
 Route::post('superadmin/student/add', [StudentController::class, 'store_student']);
+Route::get('superadmin/student/edit/{id}', [StudentController::class, 'edit_student']);
+Route::post('superadmin/student/edit/{id}', [StudentController::class, 'editupdate_student']);
+Route::get('superadmin/student/delete/{id}', [StudentController::class, 'student_destroy']);
 });
 Route::group(['middleware' => 'admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
