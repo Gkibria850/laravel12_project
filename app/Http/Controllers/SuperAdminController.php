@@ -11,13 +11,16 @@ class SuperAdminController extends Controller
     {
         // User list logic
         $data['meta_title'] = 'User List'; 
-       // $data['getRecord'] = User::whereIn('is_role', [0, 1])->get();
+       //$data['getRecord'] = User::whereIn('is_role', [0, 1])->get();
        $data['getRecord'] = User::getRecord($request);
         return view('superadmin.user.list', $data);
     }
     public function user_delete($id)
     {
         //User::find($id)->delete();
+        $user = User::getUserSingle($id);
+        $user->is_delete = 1;
+        $user->save();
         
         return redirect()->back()->with('error', 'Record Delete Successfully');
     }

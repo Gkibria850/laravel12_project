@@ -114,6 +114,11 @@ class StudentController extends Controller
     //      return redirect('superadmin/student/list')->with('success', 'Student deleted successfully');
     //  }
     public function student_destroy($id){
+        //$student = StudentsModel::find($id)->delete();
+        $student = StudentsModel::getSingle($id);
+        $student->is_delete = 1;
+         $student->save();
+        return redirect('superadmin/student/list')->with('success', 'Student deleted successfully');
 
     }
      

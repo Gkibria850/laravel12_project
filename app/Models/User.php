@@ -69,7 +69,13 @@ class User extends Authenticatable
         }
 
     
-        $return = $return->get();
+        $return = $return
+       //->where('is_delete', '=', 0)
+        ->get();
         return $return;
+    }
+    public static function getUserSingle($id)
+    {
+        return self::find($id);
     }
 }
