@@ -92,18 +92,35 @@ public function editupdate_teacher(Request $request, $id)
         $save->work_exprince = trim($request->work_exprince);
         $save->status = trim($request->status);
        
-        $save->created_by_id = Auth::id();
+        $save->edited_by_id = Auth::id();
+
+
           // Handle profile picture upload
+
           if ($request->hasFile('profile_pic')) {
             $image = $request->file('profile_pic');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('upload/profile/');
+        
+            // Delete previous image if exists
+            if (!empty($save->profile_pic)) {
+                $deleteimg = $destinationPath . $save->profile_pic;
+                if (file_exists($deleteimg)) {
+                    unlink($deleteimg);
+                }
+            }
+        
+            // Move new image to destination
             $image->move($destinationPath, $image_name);
-
-            // Update the user's profile picture
+        
+            // Update and save profile picture
             $save->profile_pic = $image_name;
             $save->save();
         }
+        
+
+
+
         $save->save();
 
         return redirect('superadmin/teacher/list')->with('success', 'Student Edit Update  successfully');
