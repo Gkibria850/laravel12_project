@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\SubjectsController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -40,6 +41,16 @@ Route::post('superadmin/teacher/add', [TeacherController::class, 'store_teacher'
 Route::get('superadmin/teacher/edit/{id}', [TeacherController::class, 'edit_teacher']);
 Route::post('superadmin/teacher/edit/{id}', [TeacherController::class, 'editupdate_teacher']);
 Route::get('superadmin/teacher/delete/{id}', [TeacherController::class, 'teacher_destroy']);
+
+//Subject
+Route::get('superadmin/subject/list', [SubjectsController::class, 'subject_list']);
+Route::get('superadmin/subject/add', [SubjectsController::class, 'add_subject']);
+Route::post('superadmin/subject/add', [SubjectsController::class, 'store_subject']);
+Route::get('superadmin/subject/edit/{id}', [SubjectsController::class, 'edit_subject']);
+Route::post('superadmin/subject/edit/{id}', [SubjectsController::class, 'editupdate_subject']);
+Route::get('superadmin/subject/delete/{id}', [SubjectsController::class, 'subject_destroy']);
+
+
 });
 Route::group(['middleware' => 'admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
