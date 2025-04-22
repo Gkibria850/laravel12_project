@@ -8,6 +8,7 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectsController;
+use App\Http\Controllers\ClassesController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -49,6 +50,10 @@ Route::post('superadmin/subject/add', [SubjectsController::class, 'store_subject
 Route::get('superadmin/subject/edit/{id}', [SubjectsController::class, 'edit_subject']);
 Route::post('superadmin/subject/edit/{id}', [SubjectsController::class, 'editupdate_subject']);
 Route::get('superadmin/subject/delete/{id}', [SubjectsController::class, 'subject_destroy']);
+
+//classes
+Route::get('superadmin/classes/list', [ClassesController::class, 'classes_list']);
+Route::get('superadmin/classes/add', [ClassesController::class, 'add_classes']);
 
 
 });
