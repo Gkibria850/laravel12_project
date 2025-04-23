@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ClassesModel;
+use App\Models\SubjectsModel;
+use App\Models\TeachersModel;
+use Auth;
 
 class ClassesController extends Controller
 {
@@ -17,6 +20,22 @@ class ClassesController extends Controller
     public function add_classes()
     {
         $data['meta_title'] = 'classes Add';  
+        $data['getSubjects'] = SubjectsModel::get();
+        $data['getTeachers'] = TeachersModel::get();
         return view('superadmin.classes.add',$data); 
+    }
+    public function store_classes(Request $request)
+    {
+         //dd($request->all());
+         $save = new ClassesModel;
+         $save->subjects_id = trim($request->subjects_id);
+         $save->teachers_id = trim($request->teachers_id);
+         $save->start_time = trim($request->start_time);
+         $save->end_time = trim($request->end_time);
+         $save->room_number = trim($request->room_number);
+         $save->created_by_id = Auth::id();
+        $save->save();
+         // Redirect with success message
+         return redirect('superadmin/classes/list')->with('success', 'Classes created successfully'); 
     }
 }
