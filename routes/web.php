@@ -55,6 +55,8 @@ Route::get('superadmin/subject/delete/{id}', [SubjectsController::class, 'subjec
 Route::get('superadmin/classes/list', [ClassesController::class, 'classes_list']);
 Route::get('superadmin/classes/add', [ClassesController::class, 'add_classes']);
 Route::post('superadmin/classes/add', [ClassesController::class, 'store_classes']);
+Route::get('superadmin/classes/edit/{id}', [ClassesController::class, 'edit_classes']);
+Route::post('superadmin/classes/edit/{id}', [ClassesController::class, 'editupdate_classes']);
 
 
 });

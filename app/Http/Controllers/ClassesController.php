@@ -38,4 +38,25 @@ class ClassesController extends Controller
          // Redirect with success message
          return redirect('superadmin/classes/list')->with('success', 'Classes created successfully'); 
     }
+    public function edit_classes($id){
+        $data['meta_title'] = 'Edit Classes';
+        $data['getSubjects'] = SubjectsModel::get();
+        $data['getTeachers'] = TeachersModel::get();
+        $data['getRecord'] = ClassesModel::find($id); 
+        return view('superadmin/classes/edit',$data);
+    }
+    public function editupdate_classes(Request $request, $id){
+         //dd($request->all());
+         $save = ClassesModel::find($id);
+         $save->subjects_id = trim($request->subjects_id);
+         $save->teachers_id = trim($request->teachers_id);
+         $save->start_time = trim($request->start_time);
+         $save->end_time = trim($request->end_time);
+         $save->room_number = trim($request->room_number);
+         $save->edited_by_id = Auth::id();
+        $save->save();
+         // Redirect with success message
+         return redirect('superadmin/classes/list')->with('success', 'Classes Edited successfully'); 
+    }
+    
 }
