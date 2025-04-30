@@ -40,7 +40,14 @@ class AuthController extends Controller
         $user->remember_token = Str::random(50);  // Generate unique token for remember me functionality
         $user->save();
         return redirect('login')->with('success', 'Registration successful. Please login.');
-        
+        // $user = new User;
+        // $user->name = trim($request->name);
+        // $user->email = trim($request->email);
+        // $user->password =  Hash::make($request->password);
+        // $user->is_role =  trim($request->is_role);
+        // $user->remember_token = Str::random(50);  // Generate unique token for remember me functionality
+        // $user->save();
+        // return redirect('login')->with('success', 'Registration successful. Please login.');
     }
     public function login()
     {
