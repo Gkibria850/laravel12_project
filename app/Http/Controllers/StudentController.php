@@ -83,6 +83,7 @@ class StudentController extends Controller
         $save->date_of_birth = trim($request->date_of_birth);
         $save->gender = trim($request->gender);
         $save->religion = trim($request->religion);
+        $save->status = (int) $request->status;
         $save->admission_date = trim($request->admission_date);
         $save->edited_by_id = Auth::id();
        
@@ -134,6 +135,7 @@ class StudentController extends Controller
         //$student = StudentsModel::find($id)->delete();
         $student = StudentsModel::getSingle($id);
         $student->is_delete = 1;
+         $student->deleted_by_id = Auth::id();
          $student->save();
         return redirect('superadmin/student/list')->with('success', 'Student deleted successfully');
 

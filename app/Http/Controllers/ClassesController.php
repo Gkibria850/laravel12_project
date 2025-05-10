@@ -10,7 +10,7 @@ use Auth;
 
 class ClassesController extends Controller
 {
-    public function classes_list()
+    public function classes_list(Request $request)
     {
         $data['meta_title'] = 'classes List'; 
         $data['getRecord'] = ClassesModel::getRecord();
@@ -58,5 +58,12 @@ class ClassesController extends Controller
          // Redirect with success message
          return redirect('superadmin/classes/list')->with('success', 'Classes Edited successfully'); 
     }
-    
+    public function classes_destroy($id){
+
+        $student = ClassesModel::getSingle($id);
+        $student->is_delete = 1;
+        $student->deleted_by_id = Auth::id();
+         $student->save();
+        return redirect('superadmin/classes/list')->with('success', 'Classes Delate successfully'); 
+    }
 }

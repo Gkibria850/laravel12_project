@@ -61,7 +61,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
-                        <th scope="col">class_id</th>
+                        <th scope="col">class Name</th>
                         <th scope="col">roll_number</th>
                         <th scope="col">address</th>
                         <th scope="col">father_name</th>

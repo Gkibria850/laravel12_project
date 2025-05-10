@@ -55,6 +55,7 @@ class SubjectsController extends Controller
         //$student = StudentsModel::find($id)->delete();
         $save = SubjectsModel::getSingle($id);
         $save->is_delete = 1;
+         $save->deleted_by_id = Auth::id();
         $save->save();
          return redirect('superadmin/subject/list')->with('success', 'Subject deleted  successfully');
 

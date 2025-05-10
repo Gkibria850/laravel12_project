@@ -142,6 +142,7 @@ public function editupdate_teacher(Request $request, $id)
         //$teacher = TeachersModel::find($id)->delete();
         $teacher = TeachersModel::getSingle($id);
         $teacher->is_delete = 1;
+        $teacher->deleted_by_id = Auth::id();
          $teacher->save();
         return redirect('superadmin/teacher/list')->with('success', 'Teacher deleted successfully');
 

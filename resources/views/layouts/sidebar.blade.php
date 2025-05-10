@@ -32,17 +32,17 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{url('superadmin/enrollment/list')}}" class="nav-link @if(Request::segment(2) == 'enrollment') active @endif">
+            <a href="{{url('superadmin/enrollments/list')}}" class="nav-link @if(Request::segment(2) == 'enrollments') active @endif">
                 <i class="fa fa-award"></i> Enrollments
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{url('superadmin/payment/list')}}" class="nav-link @if(Request::segment(2) == 'payment') active @endif">
+            <a href="{{url('superadmin/payments/list')}}" class="nav-link @if(Request::segment(2) == 'payments') active @endif">
                 <i class="fa fa-school"></i> Payments
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{url('superadmin/attendance/list')}}" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
+            <a href="{{url('superadmin/attendances/list')}}" class="nav-link @if(Request::segment(2) == 'attendances') active @endif">
                 <i class="fa fa-laptop-code"></i> Attendances
             </a>
         </li>

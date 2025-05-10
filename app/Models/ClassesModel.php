@@ -35,7 +35,33 @@ class ClassesModel extends Model
     
         $return = $return->join('subjects', 'subjects.id', '=', 'classes.subjects_id');
         $return = $return->join('teachers', 'teachers.id', '=', 'classes.teachers_id');
-    
+
+        //Search start
+        if(!empty(Request::get('id')))
+        {
+            $return = $return->where('classes.id', '=', Request::get('id'));
+        }
+        if(!empty(Request::get('subjects_id')))
+        {
+            $return = $return->where('subjects.name', 'like', '%' .Request::get('subjects_id').'%');
+        }
+        if(!empty(Request::get('teachers_id')))
+        {
+            $return = $return->where('teachers.name', 'like', '%' .Request::get('teachers_id').'%');
+        }
+        if(!empty(Request::get('room_number')))
+        {
+            $return = $return->where('classes.room_number', 'like', '%' .Request::get('room_number').'%');
+        }
+        if(!empty(Request::get('start_time')))
+        {
+            $return = $return->where('classes.start_time', 'like', '%' .Request::get('start_time').'%');
+        }
+        if(!empty(Request::get('end_time')))
+        {
+            $return = $return->where('classes.end_time', 'like', '%' .Request::get('end_time').'%');
+        }
+        //Search end
         $return = $return->where('classes.is_delete', '=', 0)
                          // ->where('classes.status', '=', 1)
                          ->orderBy('classes.id', 'asc')

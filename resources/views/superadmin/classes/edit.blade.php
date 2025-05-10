@@ -13,6 +13,16 @@
         
             <div class="row">
                 <!-- Name -->
+
+                  <!-- Name -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name">Name <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{$getRecord->name }}" placeholder="Enter Your Name" required>
+                        <div style="color:red">{{ $errors->first('name') }}</div>
+                    </div>
+                </div>
+                
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="name">Subject Name <span class="required">*</span></label>

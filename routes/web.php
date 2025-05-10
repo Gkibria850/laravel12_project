@@ -9,6 +9,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\EnrollmentsController;
+use App\Http\Controllers\PaymentsController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -57,6 +59,23 @@ Route::get('superadmin/classes/add', [ClassesController::class, 'add_classes']);
 Route::post('superadmin/classes/add', [ClassesController::class, 'store_classes']);
 Route::get('superadmin/classes/edit/{id}', [ClassesController::class, 'edit_classes']);
 Route::post('superadmin/classes/edit/{id}', [ClassesController::class, 'editupdate_classes']);
+Route::get('superadmin/classes/delete/{id}', [ClassesController::class, 'classes_destroy']);
+// EnrollmentsController
+
+Route::get('superadmin/enrollments/list', [EnrollmentsController::class, 'enrollments_list']);
+Route::get('superadmin/enrollments/add', [EnrollmentsController::class, 'enrollments_add']);
+Route::post('superadmin/enrollments/add', [EnrollmentsController::class, 'enrollments_store']);
+Route::get('superadmin/enrollments/edit/{id}', [EnrollmentsController::class, 'enrollments_edit']);
+Route::post('superadmin/enrollments/edit/{id}', [EnrollmentsController::class, 'enrollments_editupdate']);
+Route::get('superadmin/enrollments/delete/{id}', [EnrollmentsController::class, 'enrollments_destroy']);
+
+// Payments
+Route::get('superadmin/payments/list', [PaymentsController::class, 'payments_list']);
+Route::get('superadmin/payments/add', [PaymentsController::class, 'payments_add']);
+Route::post('superadmin/payments/add', [PaymentsController::class, 'payments_store']);
+Route::get('superadmin/payments/edit/{id}', [PaymentsController::class, 'payments_edit']);
+Route::post('superadmin/payments/edit/{id}', [PaymentsController::class, 'payments_editupdate']);
+Route::get('superadmin/payments/delete/{id}', [PaymentsController::class, 'payments_destroy']);
 
 
 });

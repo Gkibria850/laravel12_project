@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 @section('content')
 
-{{-- 
+
 <div class="container">
   
 
@@ -11,15 +11,23 @@
 
     </div>
     <div class="me-2 mb-2">
-        <input type="text" name="name" value="{{Request()->name}}" class="form-control" placeholder="Enter Your Name"/>
+        <input type="text" name="subjects_id" value="{{Request()->subjects_id}}" class="form-control" placeholder="Enter Subjects Name"/>
 
     </div>
     <div class="me-2 mb-2">
-        <input type="date" name="name" value="{{Request()->created_at}}" class="form-control" placeholder="Enter Your Name"/>
+        <input type="text" name="teachers_id" value="{{Request()->teachers_id}}" class="form-control" placeholder="Enter Teachers Name"/>
 
     </div>
     <div class="me-2 mb-2">
-        <input type="date" name="name" value="{{Request()->updated_at}}" class="form-control" placeholder="Enter Your Name"/>
+        <input type="text" name="room_number" value="{{Request()->room_number}}" class="form-control" placeholder="Enter Room Number"/>
+
+    </div>
+    <div class="me-2 mb-2">
+        <input type="time" name="start_time" value="{{Request()->start_time}}" class="form-control" placeholder="Enter Your Name"/>
+
+    </div>
+    <div class="me-2 mb-2">
+        <input type="time" name="end_time" value="{{Request()->end_time}}" class="form-control" placeholder="Enter Your Name"/>
 
     </div>
     
@@ -27,11 +35,11 @@
         <button type="submit" class="btn btn-primary">Search</button>
     </div>
     <div class="mb-2">
-        <a href="{{url('superadmin/subject/list')}}" class="btn btn-warning">Reset</a>
+        <a href="{{url('superadmin/classes/list')}}" class="btn btn-warning">Reset</a>
 
     </div>
     </form>
-</div> --}}
+</div> 
 
 <div class="col-md-12 mt-4">
     <div class="card p-4">
@@ -48,10 +56,11 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">subjects_id</th>
-                        <th scope="col">teachers_id</th>
-                        <th scope="col">start_time</th>
-                        <th scope="col">end_time</th>
+                        <th scope="col">Class Name</th>
+                        <th scope="col">Subjects_id</th>
+                        <th scope="col">Teachers_id</th>
+                        <th scope="col">Start_time</th>
+                        <th scope="col">End_time</th>
                         <th scope="col">room_number</th>
                         <th scope="col">Created_at</th>
                         <th scope="col">Updated_at</th>
@@ -62,6 +71,7 @@
                     @forelse ($getRecord as $value)
                     <tr>
                         <td>{{$value->id}}</td>
+                        <td>{{$value->name}}</td>
                         <td>{{$value->subjects_name}}</td>
                         <td>{{$value->teachers_name}}</td>
                         <td>{{ date('h:i:s A', strtotime($value->start_time))}}</td>
